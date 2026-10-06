@@ -56,4 +56,30 @@ void Text::replaceText(string text, int position){
 string Text::showDocument(){
 	return content;
 }
+
+void Text::showDocument() const{
+	if(content.isEmpty()){
+		cout<<"Document is empty\n";
+		return;
+	}
+	cout<<"========== DOCUMENT ==========\n"
+		<<content<<"\n"
+		<<"Length: "<<content.size()
+		<<" | Cursor: " << cursorPos << "\n";
+}
+
+void Text::pushAction(const Action & action){
+	undoStack.push(action);
+	clearRedoStack();
+}
+
+void Text::clearRedoStack(){
+	if(redoStack.isEmpty()){
+		return;
+	}
+	while(!redoStack.isEmpty()){
+		redoStack.pop();
+	}
+	cout<<"redo stack cleared\n";
+}
 	
