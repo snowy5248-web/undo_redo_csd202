@@ -53,19 +53,16 @@ void Text::replaceText(string text, int position){
 		redoStack.pop();
 	}
 }
-string Text::showDocument(){
-	return content;
-}
 
 void Text::showDocument() const{
-	if(content.isEmpty()){
+	if(content.empty()){
 		cout<<"Document is empty\n";
 		return;
 	}
 	cout<<"========== DOCUMENT ==========\n"
 		<<content<<"\n"
 		<<"Length: "<<content.size()
-		<<" | Cursor: " << cursorPos << "\n";
+	    <<"\n";
 }
 
 void Text::pushAction(const Action & action){
