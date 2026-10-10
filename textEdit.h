@@ -15,6 +15,10 @@ class Text{
 		void showDocument() const;
 		void pushAction(const Action & action);
 		void clearRedoStack(); 
+		bool isUndoEmpty();
+		bool isRedoEmpty();
+		void undo();
+		void redo();
 };
 
 #endif
