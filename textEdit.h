@@ -11,8 +11,14 @@ class Text{
 		Text();
 		void insertText(string text, int position);
 		void deleteText(int position, int length);
-		void replaceText(string text, int position);
-		string showDocument(); //this is just a test, change it when you code mr 
+		void replaceText(string text, int position, int length);
+		void showDocument() const;
+		void pushAction(const Action & action);
+		void clearRedoStack(); 
+		bool isUndoEmpty();
+		bool isRedoEmpty();
+		void undo();
+		void redo();
 };
 
 #endif

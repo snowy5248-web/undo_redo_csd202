@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o action.o textEdit.o stack.o
-LINKOBJ  = main.o action.o textEdit.o stack.o
+OBJ      = action.o main.o stack.o textEdit.o undo_redo.o
+LINKOBJ  = action.o main.o stack.o textEdit.o undo_redo.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
@@ -24,14 +24,17 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
+action.o: action.cpp
+	$(CPP) -c action.cpp -o action.o $(CXXFLAGS)
+
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
 
-action.o: action.cpp
-	$(CPP) -c action.cpp -o action.o $(CXXFLAGS)
+stack.o: stack.cpp
+	$(CPP) -c stack.cpp -o stack.o $(CXXFLAGS)
 
 textEdit.o: textEdit.cpp
 	$(CPP) -c textEdit.cpp -o textEdit.o $(CXXFLAGS)
 
-stack.o: stack.cpp
-	$(CPP) -c stack.cpp -o stack.o $(CXXFLAGS)
+undo_redo.o: undo_redo.cpp
+	$(CPP) -c undo_redo.cpp -o undo_redo.o $(CXXFLAGS)

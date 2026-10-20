@@ -17,6 +17,10 @@ void Text::insertText(string text, int position){
 	}
 }
 void Text::deleteText(int position, int length){
+	if(content.length() == 0){
+		cout << "No text!" << endl;
+		return;
+	}
 	if(position < 0 || position > content.length()){
 		cout << "Invalid position!" << endl;
 		return;
@@ -35,25 +39,53 @@ void Text::deleteText(int position, int length){
 	}
 }
 	
-void Text::replaceText(string text, int position){
-	if(position < 0 || position > content.length()){
-		cout << "Invalid position!" << endl;
+void Text::replaceText(string text, int position, int length){
+    if(content.length() == 0){
+        cout << "No text!" << endl;
+        return;
+    }
+    if(position < 0 || position > content.length()){
+        cout << "Invalid position!" << endl;
+        return;
+    }
+    if(position + length > content.length()){
+        cout << "Invalid length!" << endl;
+        return;
+    }
+
+    string oldText = content.substr(position, length);
+    content.replace(position, length, text);
+
+    Action rep("Replace", position, oldText, text);
+    undoStack.push(rep);
+    while(!redoStack.isEmpty()){
+        redoStack.pop();
+    }
+}
+
+void Text::showDocument() const{
+	if(content.empty()){
+		cout<<"Document is empty\n";
 		return;
 	}
-	if(position + text.length() > content.length()){
-		cout << "Invalid length!" << endl;
+	cout<<"========== DOCUMENT ==========\n"
+		<<content<<"\n"
+		<<"Length: "<<content.size()
+	    <<"\n";
+}
+
+void Text::pushAction(const Action & action){
+	undoStack.push(action);
+	clearRedoStack();
+}
+
+void Text::clearRedoStack(){
+	if(redoStack.isEmpty()){
 		return;
 	}
-	string oldText = content.substr(position, text.length());
-	content.replace(position, text.length(), text);
-	
-	Action rep("Replace", position, oldText, text);
-	undoStack.push(rep);
 	while(!redoStack.isEmpty()){
 		redoStack.pop();
 	}
-}
-string Text::showDocument(){
-	return content;
+	cout<<"redo stack cleared\n";
 }
 	
