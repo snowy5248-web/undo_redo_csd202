@@ -88,4 +88,30 @@ void Text::clearRedoStack(){
 	}
 	cout<<"redo stack cleared\n";
 }
+
+void Text::showDocument() const{
+	if(content.empty()){
+		cout<<"Document is empty\n";
+		return;
+	}
+	cout<<"========== DOCUMENT ==========\n"
+		<<content<<"\n"
+		<<"Length: "<<content.size()
+	    <<"\n";
+}
+
+void Text::pushAction(const Action & action){
+	undoStack.push(action);
+	clearRedoStack();
+}
+
+void Text::clearRedoStack(){
+	if(redoStack.isEmpty()){
+		return;
+	}
+	while(!redoStack.isEmpty()){
+		redoStack.pop();
+	}
+	cout<<"redo stack cleared\n";
+}
 	
