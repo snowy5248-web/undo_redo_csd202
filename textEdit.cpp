@@ -25,7 +25,7 @@ void Text::deleteText(int position, int length){
 		cout << "Invalid position!" << endl;
 		return;
 	}
-	if(position + length > content.length()){
+	if(length < 0 || position + length > content.length()){
 		cout << "Invalid length!" << endl;
 		return;
 	}
@@ -48,7 +48,7 @@ void Text::replaceText(string text, int position, int length){
         cout << "Invalid position!" << endl;
         return;
     }
-    if(position + length > content.length()){
+    if(length < 0 || position + length > content.length()){
         cout << "Invalid length!" << endl;
         return;
     }
@@ -89,29 +89,4 @@ void Text::clearRedoStack(){
 	cout<<"redo stack cleared\n";
 }
 
-void Text::showDocument() const{
-	if(content.empty()){
-		cout<<"Document is empty\n";
-		return;
-	}
-	cout<<"========== DOCUMENT ==========\n"
-		<<content<<"\n"
-		<<"Length: "<<content.size()
-	    <<"\n";
-}
-
-void Text::pushAction(const Action & action){
-	undoStack.push(action);
-	clearRedoStack();
-}
-
-void Text::clearRedoStack(){
-	if(redoStack.isEmpty()){
-		return;
-	}
-	while(!redoStack.isEmpty()){
-		redoStack.pop();
-	}
-	cout<<"redo stack cleared\n";
-}
 	

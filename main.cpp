@@ -11,7 +11,7 @@ bool readInt(int &out) {
     if (cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input, please enter a number.\n";
+        cout << "Invalid input, please enter a number!\n";
         return false;
     }
     // discard the rest of the line, including the '\n'
