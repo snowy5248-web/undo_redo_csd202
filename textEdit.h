@@ -19,6 +19,9 @@ class Text{
 		bool isRedoEmpty();
 		void undo();
 		void redo();
+		void showHistory();
+   		bool saveDocument(const string& filename);
+   		bool loadDocument(const string& filename);
 };
 
 #endif

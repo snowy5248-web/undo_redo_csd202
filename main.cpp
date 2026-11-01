@@ -44,6 +44,7 @@ int main() {
                 "6. Show text\n"
                 "7. Save to file\n"
                 "8. Load from file\n"
+                "9. Show history\n"
                 "0. Exit\n"
                 "Choose an option: ";
 
@@ -80,18 +81,20 @@ int main() {
             case 5: t.redo(); break;
             case 6: t.showDocument(); break;
 
-//            case 7:
-//                cout << "Enter filename to save: ";
-//                getline(cin, filename);
-//                t.saveDocument(filename);
-//                break;
-//
-//            case 8:
-//                cout << "Enter filename to load: ";
-//                getline(cin, filename);
-//                t.loadDocument(filename);
-//                break;
+           case 7:
+               cout << "Enter filename to save: ";
+               getline(cin, filename);
+               t.saveDocument(filename);
+               break;
 
+           case 8:
+               cout << "Enter filename to load: ";
+               getline(cin, filename);
+               t.loadDocument(filename);
+               break;
+            case 9:
+                t.showHistory();
+                break;
             case 0:
                 cout << "Exiting...\n";
                 break;
