@@ -1,21 +1,30 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <cstdlib>
+#include <cctype>
 #include "textEdit.h"
 
 using namespace std;
 
 // Read an int; returns false (and cleans up) on bad input.
 bool readInt(int &out) {
-    cin >> out;
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input, please enter a number!\n";
+    string line;
+    if (!getline(cin, line)) exit(0);      // EOF: exit instead of looping
+
+    size_t used = 0;
+    try {
+        out = stoi(line, &used);
+    } catch (...) {                         // not a number, or too big for int
+        cout << "Invalid input, please enter an int!\n";
         return false;
     }
-    // discard the rest of the line, including the '\n'
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    // reject trailing junk like ".29" or "abc"; allow trailing spaces
+    while (used < line.size() && isspace((unsigned char)line[used])) used++;
+    if (used != line.size()) {
+        cout << "Invalid input, please enter an int!\n";
+        return false;
+    }
     return true;
 }
 

@@ -13,6 +13,10 @@ class Stack{
 		Node *top;
 	public:
 		Stack();
+		~Stack();
+		Stack(const Stack&) = delete;
+		Stack& operator=(const Stack&) = delete;
+		void clear();
 		bool isEmpty();
 		int size();
 		void push(Action x);

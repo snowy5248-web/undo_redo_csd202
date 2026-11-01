@@ -3,17 +3,11 @@
 using namespace std;
 
 bool Text::isUndoEmpty(){
-	if(undoStack.size() == 0){
-		return true;
-	}
-	return false;
+	return undoStack.isEmpty();
 }
 
 bool Text::isRedoEmpty(){
-	if(redoStack.size() == 0){
-		return true;
-	}
-	return false;
+	return redoStack.isEmpty();
 }
 
 void Text::undo(){
@@ -25,7 +19,7 @@ void Text::undo(){
 	
 	content.replace(action.getPos(), action.getNewT().length(), action.getOldT());
 	
-	redoStack.push(action);
+	redoStack.push(std::move(action));
 }
 
 void Text::redo(){
@@ -37,5 +31,5 @@ void Text::redo(){
 
 	content.replace(action.getPos(), action.getOldT().length(), action.getNewT());
 	
-	undoStack.push(action);
+	undoStack.push(std::move(action));
 }
