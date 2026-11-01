@@ -13,15 +13,15 @@ using namespace std;
 		this->oldText = oT;
 		this->newText = nT;
 	}	
-	string Action::getType(){
+	const string& Action::getType() const{
 		return type;
 	}
-	int Action::getPos(){
+	int Action::getPos() const{
 		return position;
 	}
-	string Action::getOldT(){
+	const string& Action::getOldT() const{
 		return oldText;
 	}
-	string Action::getNewT(){
+	const string& Action::getNewT() const{
 		return newText;
 	}

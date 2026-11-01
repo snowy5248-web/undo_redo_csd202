@@ -17,6 +17,7 @@ class Stack{
 		Stack(const Stack&) = delete;
 		Stack& operator=(const Stack&) = delete;
 		void clear();
+		const Node* topNode() const { return top; }
 		bool isEmpty();
 		int size();
 		void push(Action x);

@@ -1,40 +1,35 @@
+// FILE MOI: showHistory, saveDocument, loadDocument
 #include <iostream>
 #include <fstream>
 #include <iterator>
 #include <string>
+#include <utility>
 #include "textEdit.h"
 using namespace std;
 
-static void showOneStack(string title, Stack &s){
+static void showOneStack(string title, const Stack &s){
 	cout << "\n" << title << ":" << endl;
-	if(s.isEmpty()){
+	const Node* n = s.topNode();
+	if(n == nullptr){
 		cout << "(empty)" << endl;
 		return;
 	}
 
-	Stack temp;
 	int count = 0;
-
-	while(!s.isEmpty()){
-		Action a = s.pop();
+	for(; n != nullptr; n = n->next){
 		count++;
-		cout << count << ". " << a.getType()
-		     << " | pos=" << a.getPos()
-		     << " | old=\"" << a.getOldT() << "\""
-		     << " | new=\"" << a.getNewT() << "\"" << endl;
-		temp.push(a);
+		cout << count << ". " << n->info.getType()
+		     << " | pos=" << n->info.getPos()
+		     << " | old=\"" << n->info.getOldT() << "\""
+		     << " | new=\"" << n->info.getNewT() << "\"" << endl;
 
-		if(count % 10 == 0 && !s.isEmpty()){
+		if(count % 10 == 0 && n->next != nullptr){
 			cout << "Press Enter to see next 10, or type q to stop: ";
 			string cmd;
 			if(!getline(cin, cmd) || cmd == "q"){
 				break;
 			}
 		}
-	}
-
-	while(!temp.isEmpty()){
-		s.push(temp.pop());
 	}
 }
 
@@ -51,22 +46,27 @@ bool Text::saveDocument(const string& filename){
 	}
 	file << content;
 	file.close();
+	if(!file){
+		cout << "Error: failed to write file" << endl;
+		return false;
+	}
 	cout << "Saved successfully" << endl;
 	return true;
 }
 
 bool Text::loadDocument(const string& filename){
 	ifstream file(filename.c_str());
-	if(!file.is_open()){ 
+	if(!file.is_open()){
 		cout << "Error: file not found" << endl;
 		return false;
 	}
+	// doc toan bo file vao 1 chuoi
 	string tempContent((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
 	file.close();
 
-	content = tempContent;
-	while(!undoStack.isEmpty()) undoStack.pop();
-	while(!redoStack.isEmpty()) redoStack.pop();
+	content = std::move(tempContent);
+	undoStack.clear();
+	redoStack.clear();
 
 	cout << "Loaded successfully" << endl;
 	return true;

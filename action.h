@@ -12,10 +12,10 @@ class Action{
 	public: 
 		Action();
 		Action(string ty, int pos, string oT, string nT);
-		string getType();
-		int getPos();
-		string getOldT();
-		string getNewT();
+		const string& getType() const;
+		int getPos() const;
+		const string& getOldT() const;
+		const string& getNewT() const;
 };
 
 #endif
