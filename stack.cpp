@@ -7,7 +7,11 @@ Stack::Stack(){
 	top = nullptr;
 }
 void Stack::clear() {
-    while (top) { Node* t = top; top = top->next; delete t; }
+    while(top){ 
+		Node* t = top; 
+		top = top->next; 
+		delete t; 
+	}
 }
 Stack::~Stack() { clear(); }
 bool Stack::isEmpty(){
@@ -24,7 +28,7 @@ int Stack::size(){
 }
 void Stack::push(Action x){
 	Node *newNode = new Node(std::move(x));
-	newNode->next = top;      //so that it works for empty case
+	newNode->next = top;      
 	top = newNode;
 }
 Action Stack::pop(){

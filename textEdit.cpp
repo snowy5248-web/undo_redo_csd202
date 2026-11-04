@@ -17,6 +17,7 @@ void Text::insertText(string text, int position){
 	Action ins("Insert", position, "", text);
 	undoStack.push(std::move(ins));
 	redoStack.clear();
+	cout << "Insert successfully!" << endl;
 	
 }
 void Text::deleteText(int position, int length){
@@ -38,6 +39,7 @@ void Text::deleteText(int position, int length){
 	Action del("Delete", position, oldText, "");
 	undoStack.push(std::move(del));
 	redoStack.clear();
+	cout << "Delete successfully!" << endl;
 	
 }
 	
@@ -65,6 +67,7 @@ void Text::replaceText(string text, int position, int length){
     Action rep("Replace", position, oldText, text);
     undoStack.push(std::move(rep));
     redoStack.clear();
+    cout << "Replace successfully!" << endl;
     
 }
 

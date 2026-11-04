@@ -20,6 +20,7 @@ void Text::undo(){
 	content.replace(action.getPos(), action.getNewT().length(), action.getOldT());
 	
 	redoStack.push(std::move(action));
+	cout << "Undo successfully!" << endl;
 }
 
 void Text::redo(){
@@ -32,4 +33,5 @@ void Text::redo(){
 	content.replace(action.getPos(), action.getOldT().length(), action.getNewT());
 	
 	undoStack.push(std::move(action));
+	cout << "Redo successfully!" << endl;
 }

@@ -51,7 +51,7 @@ bool Text::saveDocument(const string& filename){
 	}
 	file << content;
 	file.close();
-	cout << "Saved successfully" << endl;
+	cout << "Saved successfully!" << endl;
 	return true;
 }
 
@@ -65,9 +65,9 @@ bool Text::loadDocument(const string& filename){
 	file.close();
 
 	content = tempContent;
-	while(!undoStack.isEmpty()) undoStack.pop();
-	while(!redoStack.isEmpty()) redoStack.pop();
+	undoStack.clear();
+	redoStack.clear();
 
-	cout << "Loaded successfully" << endl;
+	cout << "Loaded successfully!" << endl;
 	return true;
 }

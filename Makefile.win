@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = action.o main.o stack.o textEdit.o undo_redo.o
-LINKOBJ  = action.o main.o stack.o textEdit.o undo_redo.o
+OBJ      = action.o main.o stack.o textEdit.o undo_redo.o fileIO.o
+LINKOBJ  = action.o main.o stack.o textEdit.o undo_redo.o fileIO.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
@@ -38,3 +38,6 @@ textEdit.o: textEdit.cpp
 
 undo_redo.o: undo_redo.cpp
 	$(CPP) -c undo_redo.cpp -o undo_redo.o $(CXXFLAGS)
+
+fileIO.o: fileIO.cpp
+	$(CPP) -c fileIO.cpp -o fileIO.o $(CXXFLAGS)
